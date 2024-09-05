@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7ll5vnv0bxiq"]
+
+[ext_resource type="Script" path="res://enemies/basic_farmer/basic_farmer.gd" id="1_6yr4y"]
+[ext_resource type="Texture2D" uid="uid://dx6lxillc1xqu" path="res://assets/Bauer1.png" id="2_lqi23"]
+[ext_resource type="Texture2D" uid="uid://cah1a3vqnsdfi" path="res://assets/Bauer2.png" id="3_dmumm"]
+[ext_resource type="Texture2D" uid="uid://bdrn4wp77aja8" path="res://assets/Bauer3.png" id="4_gj0tj"]
+[ext_resource type="Texture2D" uid="uid://866f6lkfivva" path="res://assets/Bauer4.png" id="5_ricap"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n6b5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lqi23")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dmumm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gj0tj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ricap")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgs61"]
+size = Vector2(8, 24)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvlto"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwe6i"]
+bg_color = Color(0, 1, 0, 1)
+
+[node name="basic_farmer" type="CharacterBody2D" groups=["Hit", "enemies"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_6yr4y")
+direction = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n6b5l")
+animation = &"walk"
+frame_progress = 0.848111
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Hit"]]
+shape = SubResource("RectangleShape2D_hgs61")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -15.5
+offset_right = 11.0
+offset_bottom = -12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bvlto")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kwe6i")
+step = 0.1
+show_percentage = false
+
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 2.0

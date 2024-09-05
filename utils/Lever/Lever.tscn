@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7fnwg2ouh1wb"]
+
+[ext_resource type="Texture2D" uid="uid://c6mjicr3hgbxi" path="res://assets/lever_sprite.png" id="1_dvoor"]
+[ext_resource type="Script" path="res://utils/Lever/Lever.gd" id="2_4l88j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqc3l"]
+resource_local_to_scene = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkmmt"]
+atlas = ExtResource("1_dvoor")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i73ix"]
+atlas = ExtResource("1_dvoor")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ftogd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkmmt")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i73ix")
+}],
+"loop": false,
+"name": &"on",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_not3s"]
+
+[node name="Lever" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_oqc3l")
+sprite_frames = SubResource("SpriteFrames_ftogd")
+animation = &"off"
+script = ExtResource("2_4l88j")
+
+[node name="InteractableArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_not3s")
+
+[connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]
+[connection signal="body_exited" from="InteractableArea" to="." method="_on_interactable_area_body_exited"]

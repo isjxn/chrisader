@@ -1,0 +1,166 @@
+[gd_scene load_steps=4 format=3 uid="uid://hllpwijw8ifp"]
+
+[ext_resource type="Script" path="res://scenes/menus/menu_options/menu_options.gd" id="1_5wjs5"]
+[ext_resource type="Theme" uid="uid://diwlomdiy70p" path="res://themes/label_normal.theme" id="2_fyrq4"]
+[ext_resource type="Theme" uid="uid://bsefhr7rfdet0" path="res://themes/button_normal.theme" id="2_imouo"]
+
+[node name="menu_options" type="CanvasLayer"]
+script = ExtResource("1_5wjs5")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = 172.0
+offset_right = -21.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="Control"]
+process_mode = 3
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -264.5
+offset_right = 150.0
+offset_bottom = 264.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -256.0
+offset_bottom = -198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fyrq4")
+theme_override_font_sizes/font_size = 40
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -166.0
+offset_right = 46.5
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MusicLabel" type="Label" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_fyrq4")
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicToggle" type="CheckButton" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -108.0
+offset_right = 72.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VolumeLabel" type="Label" parent="Control/Panel/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_fyrq4")
+text = "Music Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="Control/Panel/HBoxContainer2"]
+layout_mode = 2
+max_value = 2.0
+step = 0.05
+tick_count = 3
+ticks_on_borders = true
+
+[node name="ButtonReturn" type="Button" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = 182.0
+offset_right = 86.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_imouo")
+theme_override_font_sizes/font_size = 30
+text = "Return"
+icon_alignment = 1
+
+[node name="ButtonReset" type="Button" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = 104.0
+offset_right = 86.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_imouo")
+theme_override_font_sizes/font_size = 30
+text = "Reset"
+icon_alignment = 1
+
+[node name="ButtonCredits" type="Button" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -42.0
+offset_right = 86.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_imouo")
+theme_override_font_sizes/font_size = 30
+text = "Credits"
+icon_alignment = 1
+
+[connection signal="toggled" from="Control/Panel/HBoxContainer/MusicToggle" to="." method="_on_music_toggle_toggled"]
+[connection signal="value_changed" from="Control/Panel/HBoxContainer2/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Control/Panel/ButtonReturn" to="." method="_on_button_return_pressed"]
+[connection signal="pressed" from="Control/Panel/ButtonReset" to="." method="_on_button_reset_pressed"]
+[connection signal="pressed" from="Control/Panel/ButtonCredits" to="." method="_on_button_credits_pressed"]

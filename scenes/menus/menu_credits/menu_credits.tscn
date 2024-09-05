@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://btn8uibamb6by"]
+
+[ext_resource type="Theme" uid="uid://diwlomdiy70p" path="res://themes/label_normal.theme" id="1_3vp8m"]
+[ext_resource type="Script" path="res://scenes/menus/menu_credits/menu_credits.gd" id="2_iff1n"]
+[ext_resource type="Theme" uid="uid://bsefhr7rfdet0" path="res://themes/button_normal.theme" id="3_drpdn"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="menu_credits" type="Label" parent="."]
+offset_right = 1917.0
+offset_bottom = 791.0
+theme = ExtResource("1_3vp8m")
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_iff1n")
+
+[node name="button_back" type="Button" parent="."]
+offset_left = 1570.0
+offset_top = 895.0
+offset_right = 1816.0
+offset_bottom = 979.0
+theme = ExtResource("3_drpdn")
+text = "Return"
+
+[connection signal="pressed" from="button_back" to="menu_credits" method="_on_back_button_pressed"]

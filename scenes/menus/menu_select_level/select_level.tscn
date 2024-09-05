@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhua4pdjh1h55"]
+
+[ext_resource type="Script" path="res://scenes/menus/menu_select_level/select_level.gd" id="1_gu2vt"]
+[ext_resource type="Theme" uid="uid://diwlomdiy70p" path="res://themes/label_normal.theme" id="2_xod6e"]
+[ext_resource type="Theme" uid="uid://bsefhr7rfdet0" path="res://themes/button_normal.theme" id="3_iw20o"]
+[ext_resource type="Texture2D" uid="uid://dx7h72030jkdr" path="res://assets/stern.png" id="4_ljgtm"]
+
+[node name="select_level" type="Node2D"]
+script = ExtResource("1_gu2vt")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 617.5
+offset_top = 84.0
+offset_right = 1302.5
+offset_bottom = 258.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_xod6e")
+theme_override_font_sizes/font_size = 150
+text = "Select a level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Label"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 454.0
+offset_right = 313.0
+offset_bottom = 568.0
+theme = ExtResource("3_iw20o")
+theme_override_font_sizes/font_size = 50
+text = "1"
+
+[node name="Button2" type="Button" parent="Label/Button"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 1.0
+offset_right = 306.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 50
+text = "2"
+
+[node name="Button3" type="Button" parent="Label/Button/Button2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.018
+anchor_bottom = 0.018
+offset_left = 165.0
+offset_top = -3.052
+offset_right = 293.0
+offset_bottom = 110.948
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[node name="Button4" type="Button" parent="Label/Button/Button2/Button3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.018
+anchor_bottom = 0.018
+offset_left = 165.0
+offset_top = -3.052
+offset_right = 293.0
+offset_bottom = 110.948
+theme_override_font_sizes/font_size = 50
+text = "4"
+
+[node name="Tutorial" type="Button" parent="Label/Button"]
+layout_mode = 0
+offset_left = 209.0
+offset_top = -181.0
+offset_right = 445.0
+offset_bottom = -75.0
+text = " Tutorial "
+
+[node name="ButtonBack" type="Button" parent="."]
+offset_left = 900.0
+offset_top = 733.0
+offset_right = 1126.0
+offset_bottom = 833.0
+theme = ExtResource("3_iw20o")
+theme_override_font_sizes/font_size = 31
+text = "Return"
+
+[node name="star1" type="Sprite2D" parent="." groups=["star"]]
+visible = false
+position = Vector2(788, 645)
+texture = ExtResource("4_ljgtm")
+metadata/level = 1
+
+[node name="star2" type="Sprite2D" parent="." groups=["star"]]
+visible = false
+position = Vector2(894, 539)
+texture = ExtResource("4_ljgtm")
+metadata/level = 2
+
+[node name="star3" type="Sprite2D" parent="." groups=["star"]]
+visible = false
+position = Vector2(1086, 648)
+texture = ExtResource("4_ljgtm")
+metadata/level = 3
+
+[node name="star4" type="Sprite2D" parent="." groups=["star"]]
+visible = false
+position = Vector2(1312, 579)
+texture = ExtResource("4_ljgtm")
+metadata/level = 4
+
+[node name="star_tutorial" type="Sprite2D" parent="." groups=["star"]]
+visible = false
+position = Vector2(1091, 403)
+texture = ExtResource("4_ljgtm")
+metadata/level = 0
+
+[connection signal="pressed" from="Label/Button" to="." method="_on_level1_button_pressed"]
+[connection signal="pressed" from="Label/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Label/Button/Button2" to="." method="_on_level2_button_pressed"]
+[connection signal="pressed" from="Label/Button/Button2/Button3" to="." method="_on_level3_button_pressed"]
+[connection signal="pressed" from="Label/Button/Tutorial" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="ButtonBack" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcgnt8eii6n5u"]
+
+[ext_resource type="Script" path="res://utils/ForceWall/ForceWall.gd" id="1_5jw83"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lx8ue"]
+size = Vector2(16, 16)
+
+[node name="ForceWall" type="StaticBody2D" groups=["force_wall"]]
+collision_mask = 7
+script = ExtResource("1_5jw83")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0.564706, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lx8ue")

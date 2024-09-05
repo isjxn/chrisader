@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx8gmayx0yj4l"]
+
+[sub_resource type="GDScript" id="GDScript_bro5n"]
+script/source = "extends Control
+
+
+@onready var label = $MarginContainer/ScoreLabel
+
+func update_score(current_score, max_score):
+	var text = \"Keys: \\n\" + str(current_score) + \"/\" + str(max_score)
+	label.set_text(text)
+
+func _ready():
+	KeyState.connect(\"score_updated\", Callable(self, \"update_score\"))
+"
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_bro5n")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Keys: 
+0/3"
+horizontal_alignment = 1
+vertical_alignment = 1

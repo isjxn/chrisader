@@ -1,0 +1,236 @@
+[gd_scene load_steps=19 format=3 uid="uid://co3ss18sbxcpe"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_87mis"]
+[ext_resource type="Texture2D" uid="uid://yw5ped25oul5" path="res://assets/piggy_rechts1.png" id="2_a0orm"]
+[ext_resource type="Texture2D" uid="uid://g10n58gnb61t" path="res://assets/piggy_rechts2.png" id="3_72fmj"]
+[ext_resource type="Texture2D" uid="uid://dse3lniuhh60p" path="res://assets/piggy_rechts1_helm.png" id="4_56xo1"]
+[ext_resource type="Texture2D" uid="uid://byu4ndylypd1f" path="res://assets/tileset_schweinestall.png" id="4_bwym0"]
+[ext_resource type="Texture2D" uid="uid://bumk1pokthl08" path="res://assets/piggy_rechts1_helm_durchscheinend.png" id="5_77732"]
+[ext_resource type="Texture2D" uid="uid://bosxx4s85ah3p" path="res://assets/piggy_rechts1_durchsichtig.png" id="6_10o8r"]
+[ext_resource type="Texture2D" uid="uid://ue08og6ofr8j" path="res://assets/piggy_rechts2_helm.png" id="7_0sveg"]
+[ext_resource type="Texture2D" uid="uid://cufy25cvlio14" path="res://assets/piggy_jump.png" id="7_8rdab"]
+[ext_resource type="PackedScene" uid="uid://dx8gmayx0yj4l" path="res://UI/HUD.tscn" id="10_d01b8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d4u0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0orm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_72fmj")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_56xo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_77732")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_56xo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_77732")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_56xo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_10o8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_a0orm")
+}],
+"loop": false,
+"name": &"get_demage",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0orm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_72fmj")
+}],
+"loop": true,
+"name": &"idling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8rdab")
+}],
+"loop": true,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0orm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_72fmj")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_56xo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0sveg")
+}],
+"loop": true,
+"name": &"walking_with_helm",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1b0f"]
+size = Vector2(20, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4sod"]
+size = Vector2(22, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uae3c"]
+size = Vector2(20, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imfn7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlr6w"]
+radius = 4.37569
+height = 17.5528
+
+[sub_resource type="Animation" id="Animation_152i7"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(16, 3.81423e-06), Vector2(35, 5.54792e-10), Vector2(16, -1.19508e-09)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordLeft:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-16, 3.81329e-06), Vector2(-34, 3.81277e-06), Vector2(-16, 3.81329e-06)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_it01e"]
+_data = {
+"new_animation": SubResource("Animation_152i7")
+}
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_87mis")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d4u0d")
+animation = &"jumping"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_c1b0f")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="EnemyDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_s4sod")
+
+[node name="FeetTouchDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FeetTouchDetector"]
+position = Vector2(1, 9)
+shape = SubResource("RectangleShape2D_uae3c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_imfn7")
+position = Vector2(16, -1.19508e-09)
+rotation = -1.57115
+scale = Vector2(1.90161, 1.96389)
+texture = ExtResource("4_bwym0")
+region_enabled = true
+region_rect = Rect2(16, 80, 16, 16)
+
+[node name="SwordHitboxDetector" type="Area2D" parent="Sprite2D"]
+visible = false
+position = Vector2(121.233, 157.902)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/SwordHitboxDetector"]
+visible = false
+position = Vector2(-121.231, -157.902)
+rotation = -3.15251
+shape = SubResource("CapsuleShape2D_qlr6w")
+disabled = true
+
+[node name="SwordLeft" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_imfn7")
+position = Vector2(-16, 3.81329e-06)
+rotation = -1.57115
+scale = Vector2(1.90161, 1.96389)
+texture = ExtResource("4_bwym0")
+flip_v = true
+region_enabled = true
+region_rect = Rect2(16, 80, 16, 16)
+
+[node name="SwordHitboxDetector" type="Area2D" parent="SwordLeft"]
+visible = false
+position = Vector2(121.233, 157.902)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordLeft/SwordHitboxDetector"]
+position = Vector2(-121.231, -157.902)
+rotation = -3.15251
+shape = SubResource("CapsuleShape2D_qlr6w")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_it01e")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("10_d01b8")]
+
+[connection signal="body_entered" from="EnemyDetector" to="." method="_on_enemy_detector_body_entered"]
+[connection signal="body_entered" from="FeetTouchDetector" to="." method="_on_feet_touch_detector_body_entered"]
+[connection signal="area_entered" from="Sprite2D/SwordHitboxDetector" to="." method="_on_sword_hitbox_detector_area_entered"]
+[connection signal="body_entered" from="Sprite2D/SwordHitboxDetector" to="." method="_on_sword_hitbox_detector_body_entered"]
+[connection signal="area_entered" from="SwordLeft/SwordHitboxDetector" to="." method="_on_sword_hitbox_detector_area_entered"]
+[connection signal="body_entered" from="SwordLeft/SwordHitboxDetector" to="." method="_on_sword_hitbox_detector_body_entered"]
